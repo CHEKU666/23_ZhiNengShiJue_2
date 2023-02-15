@@ -1,2 +1,4 @@
-# 23_ZhiNengShiJue_2
-23_鏅鸿兘瑙嗚_2
+#### 直接打开Project/project/MDK/rt1064.uvprojx
+
+#### 用户代码放进code文件夹，在keil中再添加
+
