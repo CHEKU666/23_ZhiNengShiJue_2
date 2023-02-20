@@ -49,13 +49,25 @@ int main(void)
     debug_init();                   // 调试端口初始化
 
     // 此处编写用户代码 例如外设初始化代码等
-    
+    func_soft_delay(300);
+		tft180_init();
+		tft180_show_string (0, 0, "TFT180 Init!");
+		if(mpu6050_init()){tft180_show_string (0, 0, "MPU6050 Init Failure");}	
+		else tft180_show_string (0, 0, "MPU6050 Init OK");
     // 此处编写用户代码 例如外设初始化代码等
     while(1)
     {
         // 此处编写需要循环执行的代码
-        
-        
+        mpu6050_get_acc();                                     // 获取 MPU6050 加速度计数据
+				mpu6050_get_gyro();																		 // 获取 MPU6050 陀螺仪数据
+			   
+			  tft180_show_int (0,1, mpu6050_gyro_x,4 );
+			  tft180_show_int (0,2, mpu6050_gyro_y,4);
+			  tft180_show_int (0,3, mpu6050_gyro_z,4);
+			  tft180_show_int (0,4, mpu6050_acc_x,4);
+			  tft180_show_int (0,5, mpu6050_acc_y,4);
+			  tft180_show_int (0,6, mpu6050_acc_z,4);
+      
         // 此处编写需要循环执行的代码
     }
 }
