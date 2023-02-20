@@ -39,7 +39,7 @@
 *                   软件 IIC 通信引脚对应关系
 *                   SCL                 查看 zf_device_mpu6050.h 中 MPU6050_SOFT_IIC_SCL 宏定义
 *                   SDA                 查看 zf_device_mpu6050.h 中 MPU6050_SOFT_IIC_SDA 宏定义
-*                   VCC                 3.3V电源
+*                   VCC                   3.3V电源
 *                   GND                 电源地
 *                   其余引脚悬空
 *

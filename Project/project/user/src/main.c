@@ -48,6 +48,7 @@ int main(void)
     clock_init(SYSTEM_CLOCK_600M);  // 不可删除
     debug_init();                   // 调试端口初始化
 
+    gpio_init(B9,GPO,0,GPO_PUSH_PULL);
     // 此处编写用户代码 例如外设初始化代码等
     func_soft_delay(300);
 		tft180_init();
@@ -57,6 +58,11 @@ int main(void)
     // 此处编写用户代码 例如外设初始化代码等
     while(1)
     {
+        gpio_set_level(B9,1);
+        system_delay_ms(100);
+        gpio_set_level(B9,0);
+        system_delay_ms(100);
+        // gpio_set_level(B9,1)
         // 此处编写需要循环执行的代码
         mpu6050_get_acc();                                     // 获取 MPU6050 加速度计数据
 				mpu6050_get_gyro();																		 // 获取 MPU6050 陀螺仪数据
