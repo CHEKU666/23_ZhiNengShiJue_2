@@ -41,7 +41,7 @@
 // 本例程是开源库移植用空工程
 
 
-/*定义四个编码器*/
+/*声明四个编码器的数值变量*/
 int16 encoder1;
 int16 encoder2;
 int16 encoder3;
@@ -59,6 +59,15 @@ int main(void)
 		tft180_show_string (0, 1, "MPU6050Fail");
 	}	
 	else tft180_show_string (0, 1, "MPU6050InitOK");
+	/*电机驱动控制信号接口初始化配置*/
+	pwm_init(PWM2_MODULE3_CHA_D2, 17000, 0);   							//驱动控制信号1右侧下方，右电机正转引脚
+	pwm_init(PWM2_MODULE3_CHB_D3, 17000, 0);							//驱动控制信号1右侧上方，右电机反转引脚
+	pwm_init(PWM1_MODULE3_CHA_D0, 17000, 0); 							//驱动控制信号1左侧下方,左电机正转引脚
+	pwm_init(PWM1_MODULE3_CHB_D1, 17000, 0); 							//驱动控制信号1左侧上方，左电机反转引脚
+	pwm_init(PWM1_MODULE1_CHB_D15, 17000, 0);							// 驱动控制信号2右侧上方,右电机正转引脚
+	pwm_init(PWM1_MODULE1_CHA_D14, 17000, 0);							// 驱动控制信号2右侧下方，右电机反转引脚
+	pwm_init(PWM1_MODULE0_CHB_D13, 17000, 0);							// 驱动控制信号2左侧上方，左电机正转引脚
+	pwm_init(PWM1_MODULE0_CHA_D12, 17000, 0);							// 驱动控制信号2左侧下方，左电机反转引脚
 	encoder_dir_init(QTIMER1_ENCODER1, QTIMER1_ENCODER1_CH1_C0, QTIMER1_ENCODER1_CH2_C1);    //初始化四路编码器
 	encoder_dir_init(QTIMER1_ENCODER2, QTIMER1_ENCODER2_CH1_C2, QTIMER1_ENCODER2_CH2_C24);
 	encoder_dir_init(QTIMER2_ENCODER1, QTIMER2_ENCODER1_CH1_C3, QTIMER2_ENCODER2_CH2_C25);
