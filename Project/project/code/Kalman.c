@@ -22,10 +22,7 @@
     float angle = 0.0f; // Reset the angle
     float bias = 0.0f;  // Reset bias
 
-    float P[0][0] = 0.0f; // Since we assume that the bias is 0 and we know the starting angle (use setAngle), the error covariance matrix is set like so - see: http://en.wikipedia.org/wiki/Kalman_filter#Example_application.2C_technical
-    float P[0][1] = 0.0f;
-    float P[1][0] = 0.0f;
-    float P[1][1] = 0.0f;
+    float P[2][2] = {{0.0f,0.0f},{0.0f,0.0f}}; // Since we assume that the bias is 0 and we know the starting angle (use setAngle), the error covariance matrix is set like so - see: http://en.wikipedia.org/wiki/Kalman_filter#Example_application.2C_technical
 
 // The angle should be in degrees and the rate should be in degrees per second and the delta time in seconds
 float getAngle(float newAngle, float newRate, float dt)
@@ -76,14 +73,14 @@ float getAngle(float newAngle, float newRate, float dt)
     return angle;
 };
 
-void setAngle(float angle) { this.angle = angle; }; // Used to set angle, this should be set as the starting angle
-float getRate() { return this->rate; };              // Return the unbiased rate
+void setAngle(float Angle) { angle = Angle; }; // Used to set angle, this should be set as the starting angle
+float getRate() { return rate; };              // Return the unbiased rate
 
 /* These are used to tune the Kalman filter */
-void setQangle(float Q_angle) { this->Q_angle = Q_angle; };
-void setQbias(float Q_bias) { this->Q_bias = Q_bias; };
-void setRmeasure(float R_measure) { this->R_measure = R_measure; };
+void setQangle(float Qangle) {Q_angle = Qangle; };
+void setQbias(float Qbias) { Q_bias = Qbias; };
+void setRmeasure(float Rmeasure) { R_measure = Rmeasure; };
 
-float getQangle() { return this->Q_angle; };
-float getQbias() { return this->Q_bias; };
-float getRmeasure() { return this->R_measure; };
+float getQangle() { return Q_angle; };
+float getQbias() { return Q_bias; };
+float getRmeasure() { return R_measure; };
