@@ -48,23 +48,36 @@ void CSI_IRQHandler(void)
 
 void PIT_IRQHandler(void)
 {
-    if(pit_flag_get(PIT_CH0))
+    if (pit_flag_get(PIT_CH0))
     {
         pit_flag_clear(PIT_CH0);
     }
-    
-    if(pit_flag_get(PIT_CH1))
+
+    if (pit_flag_get(PIT_CH1))
     {
-        pit_flag_clear(PIT_CH1);
+        /*通道1发生中断,开始采集（刷新）编码器数据*/
+        encoder1 = encoder_get_count(QTIMER1_ENCODER1);
+        encoder1 = encoder_get_count(QTIMER1_ENCODER2);
+        encoder1 = encoder_get_count(QTIMER2_ENCODER1);
+        encoder1 = encoder_get_count(QTIMER2_ENCODER2);
+        encoder_clear_count(QTIMER1_ENCODER1);
+        encoder_clear_count(QTIMER1_ENCODER2);
+        encoder_clear_count(QTIMER2_ENCODER1);
+        encoder_clear_count(QTIMER2_ENCODER2);
+        /*刷新偏航角*/
+        YawAxis = getAngle(YawAxis, mpu6050_gyro_transition(mpu6050_acc_z), 0.005);
+        pit_flag_clear(PIT_CH1); // 清除通道1中断标志位
     }
-    
-    if(pit_flag_get(PIT_CH2))
+
+    if (pit_flag_get(PIT_CH2))
     {
+        // 通道2发生中断
         pit_flag_clear(PIT_CH2);
     }
-    
-    if(pit_flag_get(PIT_CH3))
+
+    if (pit_flag_get(PIT_CH3))
     {
+        // 通道3发生中断
         pit_flag_clear(PIT_CH3);
     }
 

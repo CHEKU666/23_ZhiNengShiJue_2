@@ -23,7 +23,7 @@
     float bias = 0.0f;  // Reset bias
 
     float P[2][2] = {{0.0f,0.0f},{0.0f,0.0f}}; // Since we assume that the bias is 0 and we know the starting angle (use setAngle), the error covariance matrix is set like so - see: http://en.wikipedia.org/wiki/Kalman_filter#Example_application.2C_technical
-
+    float rate;
 // The angle should be in degrees and the rate should be in degrees per second and the delta time in seconds
 float getAngle(float newAngle, float newRate, float dt)
 {
