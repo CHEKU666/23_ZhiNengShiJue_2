@@ -43,6 +43,6 @@
     extern float bias; // The gyro bias calculated by the Kalman filter - part of the 2x1 state vector
     extern float rate; // Unbiased rate calculated from the rate and the calculated bias - you have to call getAngle to update the rate
     extern float P[2][2]; // Error covariance matrix - This is a 2x2 matrix
-
+    extern float YawAxis;        // 小车只在xy平面上移动，陀螺仪位姿结算只涉及偏航角
 
 #endif
