@@ -84,3 +84,52 @@ void setRmeasure(float Rmeasure) { R_measure = Rmeasure; };
 float getQangle() { return Q_angle; };
 float getQbias() { return Q_bias; };
 float getRmeasure() { return R_measure; };
+/*
+Q:过程噪声，Q增大，动态响应变快，收敛稳定性变坏
+R:测量噪声，R增大，动态响应变慢，收敛稳定性变好
+其中p的初值可以随便取，但是不能为0（为0的话卡尔曼滤波器就认为已经是最优滤波器了）
+q,r的值需要我们试出来，讲白了就是(买的破温度计有多破，以及你的超人力有多强)
+r参数调整滤波后的曲线与实测曲线的相近程度，r越小越接近。
+q参数调滤波后的曲线平滑程度，q越小越平滑。
+*/
+
+KFP KFP_acc_x;
+KFP KFP_acc_y;
+KFP KFP_gyro;
+void KFP_acc_Init(KFP *KFP_height)
+{
+    KFP_height->LastP = 0.02;
+    KFP_height->Now_P = 0;
+    KFP_height->out = 0;
+    KFP_height->Kg = 0;
+    KFP_height->Q = 0.003;
+    KFP_height->R = 0.543;
+}
+
+void KFP_gyro_Init(KFP *KFP_height)
+{
+    KFP_height->LastP = 0.02;
+    KFP_height->Now_P = 0;
+    KFP_height->out = 0;
+    KFP_height->Kg = 0;
+    KFP_height->Q = 0.001;
+    KFP_height->R = 0.6;
+}
+/**
+ *卡尔曼滤波器
+ *@param KFP *kfp 卡尔曼结构体参数
+ *   float input 需要滤波的参数的测量值（即传感器的采集值）
+ *@return 滤波后的参数（最优值）
+ */
+float kalmanFilter(KFP *kfp, float input)
+{
+    // 预测协方差方程：k时刻系统估算协方差 = k-1时刻的系统协方差 + 过程噪声协方差
+    kfp->Now_P = kfp->LastP + kfp->Q;
+    // 卡尔曼增益方程：卡尔曼增益 = k时刻系统估算协方差 / （k时刻系统估算协方差 + 观测噪声协方差）
+    kfp->Kg = kfp->Now_P / (kfp->Now_P + kfp->R);
+    // 更新最优值方程：k时刻状态变量的最优值 = 状态变量的预测值 + 卡尔曼增益 * （测量值 - 状态变量的预测值）
+    kfp->out = kfp->out + kfp->Kg * (input - kfp->out); // 因为这一次的预测值就是上一次的输出值
+    // 更新协方差方程: 本次的系统协方差付给 kfp->LastP 威下一次运算准备。
+    kfp->LastP = (1 - kfp->Kg) * kfp->Now_P;
+    return kfp->out;
+}
