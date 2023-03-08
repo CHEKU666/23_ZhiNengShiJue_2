@@ -314,7 +314,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -330,7 +330,7 @@
             <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
-            <v6LangP>5</v6LangP>
+            <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
@@ -493,11 +493,6 @@
               <FileName>zf_common_function.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\libraries\zf_common\zf_common_function.h</FilePath>
-            </File>
-            <File>
-              <FileName>zf_common_headfile.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\libraries\zf_common\zf_common_headfile.h</FilePath>
             </File>
             <File>
               <FileName>zf_common_interrupt.c</FileName>
@@ -728,6 +723,11 @@
               <FileName>zf_device_absolute_encoder.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\zf_device\zf_device_absolute_encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>zf_common_headfile.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\libraries\zf_common\zf_common_headfile.h</FilePath>
             </File>
             <File>
               <FileName>zf_device_absolute_encoder.h</FileName>
@@ -2025,5 +2025,14 @@
     <components/>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>RT106X</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>
