@@ -99,10 +99,10 @@ void InitAll(void){
 	pwm_init(PWM1_MODULE1_CHA_D14, 17000, 0);											  // 驱动控制信号2右侧下方，右电机反转引脚
 	pwm_init(PWM1_MODULE0_CHB_D13, 17000, 0);											  // 驱动控制信号2左侧上方，左电机正转引脚
 	pwm_init(PWM1_MODULE0_CHA_D12, 17000, 0);											  // 驱动控制信号2左侧下方，左电机反转引脚
-	encoder_dir_init(QTIMER1_ENCODER1, QTIMER1_ENCODER1_CH1_C0, QTIMER1_ENCODER1_CH2_C1); // 初始化四路编码器
-	encoder_dir_init(QTIMER1_ENCODER2, QTIMER1_ENCODER2_CH1_C2, QTIMER1_ENCODER2_CH2_C24);
-	encoder_dir_init(QTIMER2_ENCODER1, QTIMER2_ENCODER1_CH1_C3, QTIMER2_ENCODER2_CH2_C25);
-	encoder_dir_init(QTIMER2_ENCODER2, QTIMER3_ENCODER2_CH1_B18, QTIMER3_ENCODER2_CH2_B19);
+	// encoder_dir_init(QTIMER1_ENCODER1, QTIMER1_ENCODER1_CH1_C0, QTIMER1_ENCODER1_CH2_C1); // 初始化四路编码器
+	// encoder_dir_init(QTIMER1_ENCODER2, QTIMER1_ENCODER2_CH1_C2, QTIMER1_ENCODER2_CH2_C24);
+	// encoder_dir_init(QTIMER2_ENCODER1, QTIMER2_ENCODER1_CH1_C3, QTIMER2_ENCODER2_CH2_C25);
+	// encoder_dir_init(QTIMER2_ENCODER2, QTIMER3_ENCODER2_CH1_B18, QTIMER3_ENCODER2_CH2_B19);
 	pit_ms_init(PIT_CH1, 5); // 初始化pit通道1，周期为5毫秒，采集编码器数据，刷新偏航角
 	EnableGlobalIRQ(0);		 // 总中断最后开启
 }
