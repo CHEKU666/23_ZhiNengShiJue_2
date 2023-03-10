@@ -7,10 +7,9 @@ float absAcc[2] = {0, 0}; // 保存上一次的加速度输出，在速度积分
 float absV[2] = {0,0};  
 strPosition selfLoc;
 
-float getNowYaw(KFP* strKFP, float t){
-    yawViaGyro = yawViaGyro+(Gyro+kalmanFilter(strKFP,mpu6050_acc_transition(mpu6050_gyro_z)))/2*t;
-    Gyro=kalmanFilter(strKFP,mpu6050_acc_transition(mpu6050_gyro_z));  //更新角速度
-    return yawViaGyro;
+void getNowYaw(KFP* strKFP, float t){
+    yawViaGyro = yawViaGyro+(Gyro+kalmanFilter(strKFP,mpu6050_gyro_transition(mpu6050_gyro_z)))/2*t;
+    Gyro=kalmanFilter(strKFP,mpu6050_gyro_transition(mpu6050_gyro_z));  //更新角速度
 };
 void getNowAbsVAndLoc(float t,float Yaw){
         Acc[0] = kalmanFilter(&KFP_acc_x,mpu6050_acc_transition(mpu6050_acc_x));  //更新加速度

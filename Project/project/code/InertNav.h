@@ -17,10 +17,9 @@ extern strPosition selfLoc; // 小车绝对坐标
 /**
  * 更新角速度,获取新的姿态角
  * @param 角速度卡尔曼结构体
- * @param 时间间隔 m/s
- * @return 偏航角 。
+ * @param 时间间隔 s
  */
-float getNowYaw(KFP* strKFP,float t);
+void getNowYaw(KFP* strKFP,float t);
 /* 更新加速度和新的大地系x,y方向速度,以及自身坐标*/
 void getNowAbsVAndLoc(float t, float Yaw);
 
