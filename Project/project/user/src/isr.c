@@ -64,8 +64,27 @@ void PIT_IRQHandler(void)
         // encoder_clear_count(QTIMER1_ENCODER2);
         // encoder_clear_count(QTIMER2_ENCODER1);
         // encoder_clear_count(QTIMER2_ENCODER2);
+        mpu6050_get_acc();  // 获取 MPU6050 加速度
+        mpu6050_get_gyro(); // 获取 MPU6050 陀螺仪数据
+        getNowAbsVAndLoc(0.05,YawAxis);
         /*刷新偏航角*/
-        YawAxis = getAngle(YawAxis, mpu6050_gyro_transition(mpu6050_acc_z), 0.005);
+        YawAxis = getAngle(YawAxis, mpu6050_gyro_transition(mpu6050_gyro_z), 0.005);
+        getNowYaw(&KFP_gyro, 0.005);
+        getNowAbsVAndLoc(0.05,YawAxis);
+        tft180_show_string(0,0,"GYRO");
+        tft180_show_float(0, 15, mpu6050_gyro_transition(mpu6050_gyro_x), 5, 5);
+        tft180_show_float(0, 30, mpu6050_gyro_transition(mpu6050_gyro_y), 5, 5);
+        tft180_show_float(0, 45, mpu6050_gyro_transition(mpu6050_gyro_z), 5, 5);
+        tft180_show_string(0, 60, "GYROFilted");
+        tft180_show_float(0, 75, kalmanFilter(&KFP_gyro,mpu6050_gyro_transition(mpu6050_gyro_z)), 5, 5);
+        // tft180_show_string(0,60,"ACC");
+        // tft180_show_float(0, 75, mpu6050_acc_transition(mpu6050_acc_x), 5, 5);
+        // tft180_show_float(0, 90, mpu6050_acc_transition(mpu6050_acc_y), 5, 5);
+        // tft180_show_int(0,105,Acc[0],5);
+        // tft180_show_int(0, 120, Acc[1], 5);
+        tft180_show_float(0, 140, YawAxis, 5, 5);
+        //tft180_show_float(0, 135, yawViaGyro, 5, 5);
+        
         pit_flag_clear(PIT_CH1); // 清除通道1中断标志位
     }
 

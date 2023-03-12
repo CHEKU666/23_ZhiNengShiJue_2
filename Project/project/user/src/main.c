@@ -56,17 +56,9 @@ int main(void)
 	while(1)
     {
         // 此处编写需要循环执行的代码
-		pit_enable(PIT_CH1);									// pit通道1开始计时
-		mpu6050_get_acc(); 										// 获取 MPU6050 加速度
-		mpu6050_get_gyro();										// 获取 MPU6050 陀螺仪数据
-	
-		tft180_show_int (0,2, mpu6050_gyro_x,5);
-		tft180_show_int (0,3, mpu6050_gyro_y,5);
-		tft180_show_int (0,4, mpu6050_gyro_z,5);
-		tft180_show_int (0,5, mpu6050_acc_x,5);
-		tft180_show_int (0,6, mpu6050_acc_y,5);
-		// tft180_show_int (0,7, mpu6050_acc_z,5);
-		tft180_show_int(0, 7, YawAxis, 5);
+		
+		
+		
 
 		// 此处编写需要循环执行的代码
     }
@@ -104,5 +96,11 @@ void InitAll(void){
 	// encoder_dir_init(QTIMER2_ENCODER1, QTIMER2_ENCODER1_CH1_C3, QTIMER2_ENCODER2_CH2_C25);
 	// encoder_dir_init(QTIMER2_ENCODER2, QTIMER3_ENCODER2_CH1_B18, QTIMER3_ENCODER2_CH2_B19);
 	pit_ms_init(PIT_CH1, 5); // 初始化pit通道1，周期为5毫秒，采集编码器数据，刷新偏航角
+	KFP_gyro_Init(&KFP_gyro);
+	KFP_acc_Init(&KFP_acc_x);
+	KFP_acc_Init(&KFP_acc_y);
+	system_delay_ms(300);
+	tft180_clear();
 	EnableGlobalIRQ(0);		 // 总中断最后开启
+	pit_enable(PIT_CH1);	 // pit通道1开始计时
 }
